@@ -1,53 +1,26 @@
 
 ## 技术栈：
-
-react + react-router + redux + immutable + less + ES6/7 + webpack + fetch
-
-
-## 下载
-
- 	git clone https://github.com/bailicangdu/pxq.git
-
- 	cd pxq
-
- 	npm install
+  react + redux + webpack + react-router + ES6/7/8 + immutable
 
 
-## 运行（nodejs 6.0+）
+## 运行项目（nodejs 6.0+）
+
 ```
- npm run dev (正常编译模式)
+ git clone https://github.com/bailicangdu/react-pxq.git
 
- npm run hot (热替换编译模式)
+ cd react-pxq
 
- 访问 http://localhost:8088
+ npm i  或者运行  yarn(推荐)
+  
+ npm start
 
- npm run dist （发布生产版本，对代码进行混淆压缩，提取公共代码，分离css文件）
+ npm run build （发布）
 ```
-
-## 2016年10月26日
-```
-初次提交
-```
-
-## 2016年11月14日
-```
-新增热替换功能
-```
-## 2016年11月16日
-```
-添加immutable.js的使用，减少组件不必要的更新，优化性能
-```
-## 2017年1月10日
-```
-1、修复热替换无法正常使用的问题，使用 react-hot-loader 代替 react-transform
-2、热替换模式下使用 http-proxy-middleware 反向代理解决跨域问题
-```
-
 
 
 ## 说明
 
->  本项目主要理解 react 和 redux 的原理，以及 react + redux 之间的配合方式
+>  本项目主要用于理解 react 和 redux 的编译方式，以及 react + redux 之间的配合方式
 
 >  如果觉得不错的话，您可以点右上角 "Star" 支持一下 谢谢！ ^_^
 
@@ -55,7 +28,7 @@ react + react-router + redux + immutable + less + ES6/7 + webpack + fetch
 
 >  如有问题请直接在 Issues 中提，或者您发现问题并有非常好的解决方案，欢迎 PR 👍
 
->  开发环境 macOS 10.12.3  Chrome 56  nodejs 6.10.0
+>  开发环境 macOS 10.13.1  Chrome 63  nodejs 8.9.1
 
 >  推荐一个 vue2 + vuex 构建的 45 个页面的大型开源项目。[地址在这里](https://github.com/bailicangdu/vue2-elm)
 
@@ -64,10 +37,10 @@ react + react-router + redux + immutable + less + ES6/7 + webpack + fetch
 
 ## 演示
 
-[查看演示效果](http://cangdu.org/pxq/)（请用chrome的手机模式预览）
+[查看演示效果](https://cangdu.org/pxq/)（请用chrome的手机模式预览）
 
 ### 移动端扫描下方二维码
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/demo.png)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/demo.png)
 
 
 
@@ -92,7 +65,7 @@ react的diff算法用在什么地方呢？当组件更新的时候，react会创
 
 对于列表的diff算法稍有不同，因为列表通常具有相同的结构，在对列表节点进行删除，插入，排序的时候，单个节点的整体操作远比一个个对比一个个替换要好得多，所以在创建列表的时候需要设置key值，这样react才能分清谁是谁。当然不写key值也可以，但这样通常会报出警告，通知我们加上key值以提高react的性能。
 
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/diff.png)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/diff.png)
 
 
 
@@ -101,7 +74,7 @@ react的diff算法用在什么地方呢？当组件更新的时候，react会创
 
 组件的创造方法为React.createClass() ——创造一个类，react系统内部设计了一套类系统，利用它来创造react组件。但这并不是必须的，我们还可以用es6的class类来创造组件,这也是Facebook官方推荐的写法。
 
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/icon_class.png)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/icon_class.png)
 
 这两种写法实现的功能一样但是原理却是不同，es6的class类可以看作是构造函数的一个语法糖，可以把它当成构造函数来看，extends实现了类之间的继承 —— 定义一个类Main 继承React.Component所有的属性和方法，组件的生命周期函数就是从这来的。constructor是构造器，在实例化对象时调用，super调用了父类的constructor创造了父类的实例对象this，然后用子类的构造函数进行修改。这和es5的原型继承是不同的，原型继承是先创造一个实例化对象this，然后再继承父级的原型方法。了解了这些之后我们在看组件的时候就清楚很多。
 
@@ -114,7 +87,7 @@ react的diff算法用在什么地方呢？当组件更新的时候，react会创
 
 ## 组件的生命周期
 
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/react-lifecycle.png)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/react-lifecycle.png)
 
 **组件在初始化时会触发5个钩子函数：**
 
@@ -231,7 +204,7 @@ react推崇的是单向数据流，自上而下进行数据的传递，但是由
 #### 流程是这个样子的：
 
 
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/simple_redux.jpg)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/simple_redux.jpg)
 
 值得注意的是connect，Provider，mapStateToProps,mapDispatchToProps是react-redux提供的，redux本身和react没有半毛钱关系，它只是数据处理中心，没有和react产生任何耦合，是react-redux让它们联系在一起。
 
@@ -241,7 +214,7 @@ react推崇的是单向数据流，自上而下进行数据的传递，但是由
 
 #### 先上一张图
 
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/all_redux.png)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/all_redux.png)
 
 明显比第一张要复杂，其实两张图说的是同一件事。从上而下慢慢分析：
 
@@ -285,7 +258,7 @@ const reducer = combineReducers({
 **combineReducers:**
 >其实它也是一个reducer，它接受整个state和一个action，然后将整个state拆分发送给对应的reducer进行处理，所有的reducer会收到相同的action，不过它们会根据action的type进行判断，有这个type就进行处理然后返回新的state，没有就返回默认值，然后这些分散的state又会整合在一起返回一个新的state树。
 
-接下来分析一下整体的流程，首先调用store.dispatch将action作为参数传入，同时用getState获取当前的状态树state并注册subscribe的listener监听state变化，再调用combineReducers并将获取的state和action传入。combineReducers会将传入的state和action传给所有reducer，reducer会根据state的key值获取与自己对应的state，并根据action的type返回新的state，触发state树的更新，我们调用subscribe监听到state发生变化后用getState获取新的state数据。
+接下来分析一下整体的流程，首先调用store.dispatch将action作为参数传入，同时用getState获取当前的状态树state并注册subscribe的listener监听state变化，再调用combineReducers并将获取的state和action传入。combineReducers会将传入的state和action传给所有reducer，并根据action的type返回新的state，触发state树的更新，我们调用subscribe监听到state发生变化后用getState获取新的state数据。
 
 redux的state和react的state两者完全没有关系，除了名字一样。
 
@@ -393,7 +366,7 @@ import { Router, Route, Redirect, IndexRoute, browserHistory, hashHistory } from
 
 通常我们在顶层的ui组件打印props时可以看到一堆属性：
 
-![](https://github.com/bailicangdu/pxq/blob/master/src/images/react_props.png)
+![](https://github.com/bailicangdu/pxq/blob/master/screenshot/react_props.png)
 
 上图的顶层ui组件属性总共有18个，如果刚刚接触react，可能对这些属性怎么来的感到困惑，其实这些属性来自五个地方：
 
